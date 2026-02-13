@@ -1,6 +1,6 @@
-# ETA Auth Service
+# Expense Tracker App Auth Service
 
-Enterprise Token Authentication (ETA) – Secure Authentication & Authorization Microservice built using Spring Boot and Spring Security.
+Expense Tracker App (ETA) – Secure Authentication & Authorization Microservice built using Spring Boot and Spring Security.
 
 ---
 

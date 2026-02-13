@@ -193,7 +193,7 @@ A complete Postman Collection is included to demonstrate the full authentication
 
 1. Open Postman
 2. Click Import
-3. Upload `ETA-Auth-Service.postman_collection.json`
+3. Upload `AuthService.postman_collection.json`
 4. Set environment variable:
 
 ```

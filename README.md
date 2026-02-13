@@ -144,9 +144,9 @@ ETA-Project/
 
 | Method | Endpoint | Description |
 |--------|----------|------------|
-| POST | `/auth/register` | Register new user |
-| POST | `/auth/login` | Login & generate JWT |
-| POST | `/auth/refresh` | Generate new access token |
+| POST | `/auth/v1/signup` | Register new user |
+| POST | `/auth/v1/login` | Login & generate JWT |
+| POST | `/auth/v1/refreshToken` | Generate new access token |
 
 ---
 

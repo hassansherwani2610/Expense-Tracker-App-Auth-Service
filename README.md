@@ -228,7 +228,7 @@ This demonstrates the complete JWT authentication lifecycle and reflects product
 
 ```
 git clone <your-repo-url>
-cd ETA-Project
+cd ETA Project
 ./gradlew bootRun
 ```
 

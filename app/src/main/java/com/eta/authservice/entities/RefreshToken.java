@@ -1,6 +1,6 @@
 package com.eta.authservice.entities;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class) // Ensure JSON fields follow snake_case format
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class) // Ensure JSON fields follow snake_case format
 @Table(name = "tokens")
 public class RefreshToken {
 

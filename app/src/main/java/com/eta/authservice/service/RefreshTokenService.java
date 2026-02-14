@@ -5,6 +5,7 @@ import com.eta.authservice.entities.UserInfo;
 import com.eta.authservice.repository.RefreshTokenRepository;
 import com.eta.authservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -22,7 +23,7 @@ public class RefreshTokenService {
     private RefreshTokenRepository refreshTokenRepository; // Repository to manage refresh tokens
 
     public RefreshToken createRefreshToken(String username){
-        UserInfo extractedUserInfo = userRepository.findByUsername(username); // Fetch user by username
+        UserInfo extractedUserInfo = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found")); // Fetch user by username
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token(UUID.randomUUID().toString()) // Generate random token

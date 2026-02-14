@@ -23,11 +23,11 @@ import java.util.function.Function;
 public class JwtService {
 
     private final String SECRET_KEY;
-    private final long jwtExpirationMs;
+    private final long jwtExpiration;
 
     public JwtService(@Value("${jwt.secret}") String secretKey, @Value("${jwt.expiration}") long jwtExpirationMs) {
         this.SECRET_KEY = Base64.getEncoder().encodeToString(secretKey.getBytes()); // Encode secret key in Base64
-        this.jwtExpirationMs = jwtExpirationMs; // Token expiration in ms
+        this.jwtExpiration = jwtExpirationMs; // Token expiration in ms
     }
 
     private Key getSignKey(){
@@ -82,7 +82,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs)) // Set expiration
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration)) // Set expiration
                 .signWith(getSignKey(), SignatureAlgorithm.HS256) // Sign with HMAC SHA256
                 .compact(); // Build token
     }

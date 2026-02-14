@@ -25,12 +25,12 @@ public class AuthController {
     @Autowired
     private RefreshTokenService refreshTokenService;
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @PostMapping("auth/v1/signup")
     public ResponseEntity<?> signUp(@RequestBody UserInfoDto userInfoDto){
         try{
-            Boolean isSignedUp = userDetailsService.signUp(userInfoDto); // Attempt to register new user
+            Boolean isSignedUp = userDetailsServiceImpl.signUp(userInfoDto); // Attempt to register new user
 
             if (Boolean.FALSE.equals(isSignedUp)){
                 log.warn("Signup failed: User {} already exists", userInfoDto.getUsername());

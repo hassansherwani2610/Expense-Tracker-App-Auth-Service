@@ -10,7 +10,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserInfoProducer {
+public class UserInfoDtoProducer {
     public final KafkaTemplate<String, UserInfoDto> kafkaTemplate; // Kafka template used to publish messages to Kafka topics
 
     // Topic name injected from application.properties
@@ -19,7 +19,7 @@ public class UserInfoProducer {
 
     // Constructor injection for KafkaTemplate (recommended for testability)
     @Autowired
-    public UserInfoProducer(KafkaTemplate<String, UserInfoDto> kafkaTemplate){
+    public UserInfoDtoProducer(KafkaTemplate<String, UserInfoDto> kafkaTemplate){
         this.kafkaTemplate = kafkaTemplate;
     }
 

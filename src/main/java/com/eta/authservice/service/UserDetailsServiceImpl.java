@@ -1,11 +1,10 @@
 package com.eta.authservice.service;
 
 import com.eta.authservice.entities.UserInfo;
-import com.eta.authservice.eventProducer.UserInfoProducer;
+import com.eta.authservice.eventProducer.UserInfoDtoProducer;
 import com.eta.authservice.model.UserInfoDto;
 import com.eta.authservice.repository.UserRepository;
 import com.eta.authservice.utils.ValidationUtil;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,13 +23,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository; // Repository to fetch/save user data
     private final PasswordEncoder passwordEncoder; // For password hashing
 
-    private final UserInfoProducer userInfoProducer;
+    private final UserInfoDtoProducer userInfoDtoProducer;
 
     // Constructor injection
-    public UserDetailsServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserInfoProducer userInfoProducer) {
+    public UserDetailsServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserInfoDtoProducer userInfoDtoProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.userInfoProducer = userInfoProducer;
+        this.userInfoDtoProducer = userInfoDtoProducer;
     }
 
     private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
@@ -73,7 +71,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userRepository.save(userInfo); // Persist new user
         log.info("New user signed up successfully: {}", userInfoDto.getUsername()); // Log signup success
 
-        userInfoProducer.sendEventToKafka(userInfoDto); // sending user info event to User Service by KAFKA
+        userInfoDtoProducer.sendEventToKafka(userInfoDto); // sending user info event to User Service by KAFKA
 
         return true; // Signup successful
     }

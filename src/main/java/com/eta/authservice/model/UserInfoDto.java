@@ -3,8 +3,14 @@ package com.eta.authservice.model;
 import com.eta.authservice.entities.UserInfo;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class) // Use snake_case in JSON responses
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserInfoDto extends UserInfo {
     private String firstName; // User's first name
     private String lastName;  // User's last name

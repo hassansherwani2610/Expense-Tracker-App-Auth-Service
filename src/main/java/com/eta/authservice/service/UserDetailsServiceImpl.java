@@ -1,6 +1,7 @@
 package com.eta.authservice.service;
 
 import com.eta.authservice.entities.UserInfo;
+import com.eta.authservice.eventProducer.UserInfoProducer;
 import com.eta.authservice.model.UserInfoDto;
 import com.eta.authservice.repository.UserRepository;
 import com.eta.authservice.utils.ValidationUtil;
@@ -24,10 +25,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository; // Repository to fetch/save user data
     private final PasswordEncoder passwordEncoder; // For password hashing
 
+    private final UserInfoProducer userInfoProducer;
+
     // Constructor injection
-    public UserDetailsServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserDetailsServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, UserInfoProducer userInfoProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userInfoProducer = userInfoProducer;
     }
 
     private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
@@ -68,6 +72,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         userRepository.save(userInfo); // Persist new user
         log.info("New user signed up successfully: {}", userInfoDto.getUsername()); // Log signup success
+
+        userInfoProducer.sendEventToKafka(userInfoDto); // sending user info event to User Service by KAFKA
 
         return true; // Signup successful
     }

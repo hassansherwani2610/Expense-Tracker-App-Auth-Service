@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.eta.authservice'
 version = '0.0.1-SNAPSHOT'
-description = 'Expense Tracker Application using Spring Boot'
+description = 'AuthService Expense Tracker Application using Spring Boot'
 
 java {
 	toolchain {
